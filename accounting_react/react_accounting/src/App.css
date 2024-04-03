@@ -1,3 +1,4 @@
+/* Nav */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -25,3 +26,4 @@
 .nav-items a:hover {
   color: #ccc;
 }
+

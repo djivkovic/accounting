@@ -1,0 +1,97 @@
+/* Pricing Plan */
+.pricing-title{
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../images/background_image_pricing_plan.jpg');
+  background-size: cover; 
+  background-position: center; 
+}
+
+.wrapper {
+  width: 1000px;
+  margin: 0 auto;
+  letter-spacing: 1px;
+  padding: 20px; 
+  color: white; 
+}
+
+.container{
+  width: 600px;
+  height: 500px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  align-content: center;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+}
+
+.form{
+  width: 500px;  
+  background-color: rgba(255, 255, 253, 0.3);
+  height: 50vh;
+  font-size: 20px;
+  color: black;
+  font-weight: 500;
+  margin: 0 auto;
+  border-radius: 25px;
+  letter-spacing: 1px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; 
+}
+
+.form-input label{
+    text-align: center;
+    margin-bottom: 7px;
+    font-size: 22px;
+}
+
+.form-input input{
+    height: 30px;
+}
+
+.create-plan-btn{
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid black;
+    transition: background-color 0.5s;
+    background-color: #3791f2;
+    font-weight: 700;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+.create-plan-btn:hover{
+    background-color: #0070e8;
+}
+
+
+input[type="text"] {
+  font-size: 20px; 
+  color: #333; 
+  padding: 4px;
+  padding-left: 10px;
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+}
+
+input[type="number"] {
+  font-size: 20px; 
+  color: #333; 
+  padding: 4px;
+  padding-left: 10px;
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+}
