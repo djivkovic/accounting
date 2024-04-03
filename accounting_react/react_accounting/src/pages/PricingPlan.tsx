@@ -9,6 +9,7 @@ const PricingPlan = () => {
     }
 
     return ( <>
+    <body className='body_pricing_plan'>
     <div className="wrapper">
         <h1 className="pricing-title">Create new pricing plan</h1>
         <div className="container">
@@ -32,7 +33,8 @@ const PricingPlan = () => {
                 </form>
             </div>
         </div>
-    </div></> );
+    </div>
+    </body></> );
 }
  
 export default PricingPlan;

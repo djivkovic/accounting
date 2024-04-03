@@ -12,8 +12,8 @@ function App() {
      <BrowserRouter>
      <Nav/>
       <Routes>
-        <Route path="/" element={<Home />}/>
         <Route path="pricing-plan" element={<PricingPlan />}/>
+        <Route path="/" element={<Home />}/>
       </Routes>
      </BrowserRouter>
     </div>

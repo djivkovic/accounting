@@ -3,12 +3,13 @@
   text-align: center;
 }
 
-body {
+.body_pricing_plan {
   margin: 0;
   padding: 0;
-  background-image: url('../images/background_image_pricing_plan.jpg');
   background-size: cover; 
   background-position: center; 
+  background-image: url("../images/background_image_pricing_plan.jpg");
+  height: 100vh;
 }
 
 .wrapper {
@@ -83,15 +84,17 @@ input[type="text"] {
   color: #333; 
   padding: 4px;
   padding-left: 10px;
-  border: 1px solid #ccc; 
+  border: 1px solid #000000; 
   border-radius: 5px; 
+  text-align: center;
 }
 
 input[type="number"] {
   font-size: 20px; 
   color: #333; 
   padding: 4px;
+  text-align: center;
   padding-left: 10px;
-  border: 1px solid #ccc; 
+  border: 1px solid #000000; 
   border-radius: 5px; 
 }
