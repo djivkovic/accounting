@@ -5,7 +5,6 @@ const PricingPlan = (props:{name:string, user_type:string, user_id:string}) => {
     const [name, setName] = useState('');
     const [adv, setAdv] = useState('');
     const [price, setPrice] = useState('');
-    const [creator, setCreator] = useState('');
 
 
     console.log('USER ID', props.user_id);
@@ -19,16 +18,20 @@ const submit = async (e:SyntheticEvent) =>{
         const response = await fetch("http://localhost:8001/pricing-plan/create-pricing-plan",{
             method:"POST",
             headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name, adv, price, creator:'DJOLE'})
+            body:JSON.stringify({name, adv, price, creator: props.user_id})
         });
 
         const content = await response.json();
+        if(response.ok){
+            alert("Successfully created pricing plan");
+            window.location.reload();
+        }
 
         console.log("content: ", content);
     }
 
     let menu;
-    if(props.user_type ==='accounting'){
+    if(props.user_type ==='Administrator'){
         menu = (<div className='body_pricing_plan'>
     <div className="wrapper">
         <h1 className="pricing-title">Create new pricing plan</h1>

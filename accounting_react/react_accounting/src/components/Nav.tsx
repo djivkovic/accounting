@@ -2,9 +2,8 @@ import { useEffect } from "react";
 
 const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userType:string)=>void, user_id:string, setUserId:(userId:string)=>void}) => {
 
-    useEffect(() => {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        if (isLoggedIn) {
+    useEffect(() => 
+      {
             (
                 async () => {
                     const response = await fetch("http://localhost:8000/api/user", {
@@ -19,8 +18,8 @@ const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userT
                     props.setUserId(content.id);
                 }
             )();
-        }
-    }, [props.name]);
+        
+    }, [props.name, props]);
 
 
     let menu;
