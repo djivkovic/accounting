@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
 import '../css/pricing-plan.css'
-const PricingPlan = () => {
+const PricingPlan = (props:{name:string, user_type:string, user_id:string}) => {
 
     const [name, setName] = useState('');
     const [adv, setAdv] = useState('');
@@ -8,7 +8,9 @@ const PricingPlan = () => {
     const [creator, setCreator] = useState('');
 
 
-    const submit = async (e:SyntheticEvent) =>{
+    console.log('USER ID', props.user_id);
+
+const submit = async (e:SyntheticEvent) =>{
         e.preventDefault();
     
         console.log("Form submitted");
@@ -25,8 +27,9 @@ const PricingPlan = () => {
         console.log("content: ", content);
     }
 
-    return ( <>
-    <div className='body_pricing_plan'>
+    let menu;
+    if(props.user_type ==='accounting'){
+        menu = (<div className='body_pricing_plan'>
     <div className="wrapper">
         <h1 className="pricing-title">Create new pricing plan</h1>
         <div className="container">
@@ -51,7 +54,14 @@ const PricingPlan = () => {
             </div>
         </div>
     </div>
-    </div></> );
+    </div>)
+    }else{
+       menu = <div>Access denied!</div>
+    }
+
+    return ( <>
+    {menu}
+    </> );
 }
  
 export default PricingPlan;
