@@ -1,26 +1,26 @@
+import { response } from "express";
 import { useEffect } from "react";
 
 const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userType:string)=>void, user_id:string, setUserId:(userId:string)=>void}) => {
 
-    useEffect(() => 
-      {
-            (
-                async () => {
-                    const response = await fetch("http://localhost:8000/api/user", {
-                        headers: { 'Content-Type': 'application/json' },
-                        credentials: 'include',
-                    });
+  useEffect(() => {
+    (async () => {
+        try {
+            const response = await fetch("http://localhost:8000/api/user", {
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
 
-                    const content = await response.json();
-                    console.log('content', content);
-                    props.setUserType(content.user_type);
-                    props.setName(content.name);
-                    props.setUserId(content.id);
-                }
-            )();
-        
-    }, [props.name, props]);
-
+            const content = await response.json();
+            console.log('content', content);
+            props.setUserType(content.user_type);
+            props.setName(content.name);
+            props.setUserId(content.id);
+        } catch (error) {
+            console.error("Failed to fetch:");
+        }
+    })();
+}, [props.name, props]);
 
     let menu;
 
