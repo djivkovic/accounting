@@ -2,19 +2,27 @@ import { SyntheticEvent, useState } from 'react';
 import '../css/pricing-plan.css'
 const PricingPlan = () => {
 
-    const [planName, setPlanName] = useState('');
-    const [planAdv, setPlanAdv] = useState('');
-    const [planPrice, setPlanPrice] = useState('');
-    const [planCreator, setPlanCreator] = useState('');
+    const [name, setName] = useState('');
+    const [adv, setAdv] = useState('');
+    const [price, setPrice] = useState('');
+    const [creator, setCreator] = useState('');
 
 
-    const submit = (e:SyntheticEvent) =>{
+    const submit = async (e:SyntheticEvent) =>{
         e.preventDefault();
     
         console.log("Form submitted");
-        console.log(planName, planAdv, planPrice);
-       
-        window.location.reload();
+        console.log(name, adv, price);
+
+        const response = await fetch("http://localhost:8001/pricing-plan/create-pricing-plan",{
+            method:"POST",
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({name, adv, price, creator:'DJOLE'})
+        });
+
+        const content = await response.json();
+
+        console.log("content: ", content);
     }
 
     return ( <>
@@ -26,17 +34,17 @@ const PricingPlan = () => {
                 <form onSubmit={submit}>
                     <div className="form-input">
                         <label htmlFor="">Enter Plan Name: </label>
-                        <input type="text" name='plan_name' onChange={(e)=>{setPlanName(e.target.value)}} />
+                        <input type="text" name='name' onChange={(e)=>{setName(e.target.value)}} />
                     </div>
 
                      <div className="form-input">
                         <label htmlFor="">Enter Number of Advertisement: </label>
-                        <input type="number" name='plan_number_adv'  onChange={(e)=>{setPlanPrice(e.target.value)}}/>
+                        <input type="number" name='adv'  onChange={(e)=>{setPrice(e.target.value)}}/>
                     </div>
 
                      <div className="form-input">
                         <label htmlFor="">Enter Plan Price: </label>
-                        <input type="number" name='plan_price' onChange={(e)=>{setPlanAdv(e.target.value)}} />
+                        <input type="number" name='price' onChange={(e)=>{setAdv(e.target.value)}} />
                     </div>
                     <button type='submit' className='create-plan-btn'>Create Plan</button>
                 </form>

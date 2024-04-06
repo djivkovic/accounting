@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import pricingPlan
+from .models import PricingPlan
+from .serializers import PricingPlanSerializer
 
 
 # Create your views here.
@@ -12,4 +13,9 @@ class PricingPlanView(APIView):
         return Response({"message":"success"})
     
     def post(self, request):
-        pass
+        serializer = PricingPlanSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        pricing_plan  = serializer.save()
+        
+        print('pricing_plna, ', pricing_plan)
+        return Response({"message":"Successfully created pricing plan"})
