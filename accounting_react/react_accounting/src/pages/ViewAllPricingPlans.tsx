@@ -1,24 +1,46 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ViewAllPricingPlans = () => {
-    const [data, setData] = useState("");
-    const array = [
-        {"name":"djole1", "price":"2001", "adv":"301", "id":"1"},
-        {"name":"djole2", "price":"2002", "adv":"302", "id":"2"},
-        {"name":"djole3", "price":"2003", "adv":"303", "id":"3"},
-        {"name":"djole4", "price":"2004", "adv":"304", "id":"4"},
-        {"name":"djole5", "price":"2005", "adv":"305", "id":"5"},
-        {"name":"djole6", "price":"2006", "adv":"306", "id":"6"},
+     interface Product {
+    id: string;
+    name: string;
+    price: string;
+    adv: string;
+    }
+
+    const [data, setData] = useState<Product[]>([]);
 
 
+    const getAllPricingPlan = async () => {
+        try {
+            const response = await fetch("http://localhost:8001/pricing-plan/view-all-pricing-plans", {
+                method: "GET",
+                headers: { 'Content-Type': 'application/json' },
+            });
 
-    ];
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const content = await response.json();
+            setData(content);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        getAllPricingPlan();
+    }, []);
+
+    console.log('data: ', data);
     
     return (
-        <div className="products-containter">
+        <div className="products-container">
             <h2>All Pricing Plans</h2>
             <div className="products">
-                {array.map(product => (
+                {data.map(product => (
                     <div className="product" key={product.id}>
                         <h3>{product.name}</h3>
                         <div className="details">
@@ -26,9 +48,12 @@ const ViewAllPricingPlans = () => {
                             <p>Price:<br/><strong>{product.price}</strong></p>
                         </div>
                         <div className="buttons">
-                            <button className="edit">Edit</button>
-                            <button className="delete">Delete</button></div>
+                            <Link to={`/edit-pricing-plan/${product.id}`}>
+                                <button className="edit">Edit</button>
+                            </Link>
+                            <button className="delete">Delete</button>
                         </div>
+                    </div>
                 ))}
             </div>
         </div>

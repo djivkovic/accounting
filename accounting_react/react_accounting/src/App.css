@@ -48,11 +48,11 @@
 
 /* View All Pricing Plans Page */
 
-.products-containter{
+.products-container{
   padding: 2rem 4rem;
 }
 
-.products-containter h2{
+.products-container h2{
   font-size: 40px;
   font-weight: 700;
   text-align: center;
@@ -95,6 +95,7 @@
   transition: background-color 0.5s;
   cursor: pointer;
   margin-top: 150px;
+  width: 100%;
 }
 
 .product .edit:hover {
