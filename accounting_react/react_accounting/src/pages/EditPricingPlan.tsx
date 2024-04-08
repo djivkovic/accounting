@@ -38,19 +38,19 @@ const submit = async (e:SyntheticEvent) =>{
         console.log("Form submitted");
         console.log(name, adv, price);
 
-        // const response = await fetch(`http://localhost:8001/pricing-plan/edit-pricing-plan`,{
-        //     method:"POST",
-        //     headers:{'Content-Type':'application/json'},
-        //     body:JSON.stringify({name, adv, price})
-        // });
+        const response = await fetch(`http://localhost:8001/pricing-plan/edit-pricing-plan/${id}`,{
+            method:"POST",
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({name, adv, price})
+        });
 
-        // const content = await response.json();
-        // if(response.ok){
-        //     alert("Successfully edited pricing plan");
-        //     window.location.reload();
-        // }
+        const content = await response.json();
+        if(response.ok){
+            alert("Successfully edited pricing plan");
+            window.location.reload();
+        }
 
-        // console.log("content: ", content);
+        console.log("content: ", content);
     }
 
     let menu;

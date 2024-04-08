@@ -10,7 +10,8 @@ const ViewAllPricingPlans = () => {
     }
 
     const [data, setData] = useState<Product[]>([]);
-
+    const [showModal, setShowModal] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
 
     const getAllPricingPlan = async () => {
         try {
@@ -30,9 +31,39 @@ const ViewAllPricingPlans = () => {
         }
     };
 
+    const deletePricingPlan =  async (id:any)=>{
+          try {
+            const response = await fetch(`http://localhost:8001/pricing-plan/delete-pricing-plan/${id}`, {
+                method: "DELETE",
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            alert("Successfully deleted pricing plan")
+            window.location.reload();
+            const content = await response.json();
+            setData(content);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         getAllPricingPlan();
     }, []);
+
+
+    const openModal = (id: string) => {
+        setSelectedProductId(id);
+        setShowModal(true);
+    }
+
+    const closeModal = () => {
+        setSelectedProductId(null);
+        setShowModal(false);
+    }
 
     console.log('data: ', data);
     
@@ -51,7 +82,8 @@ const ViewAllPricingPlans = () => {
                             <Link to={`/edit-pricing-plan/${product.id}`}>
                                 <button className="edit">Edit</button>
                             </Link>
-                            <button className="delete">Delete</button>
+                            <button className="delete" onClick={()=>{openModal(product.id)}}>Delete</button>
+                            {showModal ? <div className="delete-modal"><p>Are you sure?</p> <button className="btn-yes" onClick={()=>{deletePricingPlan(selectedProductId)}}>Yes</button> <button className="btn-no" onClick={closeModal}>No</button></div>:<></>}
                         </div>
                     </div>
                 ))}

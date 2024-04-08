@@ -141,3 +141,50 @@
 .buttons button{
   margin-top: 2px;
 }
+
+
+/* Delete modal */
+.delete-modal{
+  width: 250px;
+  height: 130px;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: -120px;
+  background-color: rgb(178, 158, 158);
+  font-weight: 600;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.btn-no{
+  width: 80px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: rgb(244, 136, 136);
+  padding: 8px;
+  border-radius: 10px;
+  transition: background-color 0.5s;
+}
+
+.btn-no:hover{
+  background-color: rgb(247, 97, 97);
+}
+
+.btn-yes{
+  width: 80px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: rgb(174, 241, 167);
+  padding: 8px;
+  transition: background-color 0.5s;
+  border-radius: 10px;
+}
+
+.btn-yes:hover{
+  background-color: rgb(26, 255, 0);
+}
