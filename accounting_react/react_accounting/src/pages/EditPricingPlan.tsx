@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import '../css/pricing-plan.css'
 import { useParams } from 'react-router-dom';
-const EditPricingPlan = () => {
+const EditPricingPlan = (props:{name:string, user_type:string, user_id:string}) => {
 
     const [name, setName] = useState('');
     const [adv, setAdv] = useState('');
@@ -54,7 +54,7 @@ const submit = async (e:SyntheticEvent) =>{
     }
 
     let menu;
-    if(true){
+    if(props.user_type ==='Administrator'){
         menu = (<div className='body_pricing_plan'>
     <div className="wrapper">
         <h1 className="pricing-title">Edit pricing plan</h1>

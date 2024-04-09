@@ -18,8 +18,8 @@ function App() {
      <Nav name={name} setName={setName} setUserType={setUserType} user_id={user_id} setUserId={setUserId}/>
       <Routes>
         <Route path="pricing-plan" element={<PricingPlan name={name} user_type={user_type} user_id={user_id} />}/>
-        <Route path="edit-pricing-plan/:id" element={<EditPricingPlan />}/>
-        <Route path="view-all-pricing-plans" element={<ViewAllPricingPlans />}/>
+        <Route path="edit-pricing-plan/:id" element={<EditPricingPlan name={name} user_type={user_type} user_id={user_id} />}/>
+        <Route path="view-all-pricing-plans" element={<ViewAllPricingPlans name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="/" element={<Home name={name} user_type={user_type}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>

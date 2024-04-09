@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ViewAllPricingPlans = () => {
+const ViewAllPricingPlans = (props:{name:string, user_type:string, user_id:string}) => {
      interface Product {
     id: string;
     name: string;
@@ -67,8 +67,10 @@ const ViewAllPricingPlans = () => {
 
     console.log('data: ', data);
     
-    return (
-        <div className="products-container">
+    let menu;
+
+    if(props.user_type ==='Administrator'){
+        menu =  (<div className="products-container">
             <h2>All Pricing Plans</h2>
             <div className="products">
                 {data.map(product => (
@@ -88,7 +90,12 @@ const ViewAllPricingPlans = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </div>)
+    }else{
+        menu = <div>Access denied</div>
+    }
+    return (
+       menu
     );
 };
 
