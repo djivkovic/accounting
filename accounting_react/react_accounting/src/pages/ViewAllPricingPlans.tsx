@@ -69,7 +69,7 @@ const ViewAllPricingPlans = (props:{name:string, user_type:string, user_id:strin
     
     let menu;
 
-    if(props.user_type ==='Administrator'){
+    if(props.user_type ==='Accountant'){
         menu =  (<div className="products-container">
             <h2>All Pricing Plans</h2>
             <div className="products">

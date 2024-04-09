@@ -31,7 +31,7 @@ const submit = async (e:SyntheticEvent) =>{
     }
 
     let menu;
-    if(props.user_type ==='Administrator'){
+    if(props.user_type ==='Accountant'){
         menu = (<div className='body_pricing_plan'>
     <div className="wrapper">
         <h1 className="pricing-title">Create new pricing plan</h1>
