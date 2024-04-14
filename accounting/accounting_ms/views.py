@@ -5,6 +5,9 @@ from .models import PricingPlan, AccountingBalance, Transaction
 from .serializers import PricingPlanSerializer, AccountingBalanceSerializer, TransactionSerializer
 from rest_framework import status
 from django.utils import timezone
+from django.http import HttpResponse
+from datetime import timedelta
+import csv
 
 # Create your views here.
 
@@ -85,4 +88,57 @@ class BuyPricingPlan(APIView):
                 return Response(serializer.data)
             else:
                 return Response
+
+class GetAllTransactions(APIView):
+    def get(self, request):
+        transactions = Transaction.objects.all()
+        serializer = TransactionSerializer(transactions, many=True)
+        return Response(serializer.data)
     
+    
+class ExportTransactionsCSV(APIView):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=Transactions.csv'
+        
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Amount', 'User ID', 'Date'])
+        
+        transactions = Transaction.objects.all()
+        for transaction in transactions:
+            writer.writerow([transaction.id, transaction.amount, transaction.userId, transaction.created_at])
+        
+        return response
+    
+class ExportTransactionsCSV6(APIView):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=Transactions_6_months.csv'
+        
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Amount', 'User ID', 'Date'])
+        
+        six_months_ago = timezone.now() - timedelta(days=180)
+        transactions = Transaction.objects.filter(created_at__gte=six_months_ago)
+        
+        for transaction in transactions:
+            writer.writerow([transaction.id, transaction.amount, transaction.userId, transaction.created_at])
+        
+        return response
+    
+
+class ExportTransactionsCSV12(APIView):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=Transactions_12_months.csv'
+        
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Amount', 'User ID', 'Date'])
+        
+        twelve_months_ago = timezone.now() - timedelta(days=365)
+        transactions = Transaction.objects.filter(created_at__gte=twelve_months_ago)
+        
+        for transaction in transactions:
+            writer.writerow([transaction.id, transaction.amount, transaction.userId, transaction.created_at])
+        
+        return response
