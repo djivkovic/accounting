@@ -7,6 +7,7 @@ import PricingPlan from './pages/PricingPlan';
 import EditPricingPlan from './pages/EditPricingPlan';
 import ViewAllPricingPlans from './pages/ViewAllPricingPlans';
 import NotFound from './pages/NotFound';
+import PricingPlanShop from './pages/PricingPlansShop';
 
 function App() {
   const [name, setName] = useState("");
@@ -15,9 +16,10 @@ function App() {
   return (
     <div className="App">
      <BrowserRouter>
-     <Nav name={name} setName={setName} setUserType={setUserType} user_id={user_id} setUserId={setUserId}/>
+     <Nav name={name} setName={setName} setUserType={setUserType} user_id={user_id} setUserId={setUserId} user_type={user_type}/>
       <Routes>
         <Route path="pricing-plan" element={<PricingPlan name={name} user_type={user_type} user_id={user_id} />}/>
+        <Route path="pricing-plan-shop" element={<PricingPlanShop name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="edit-pricing-plan/:id" element={<EditPricingPlan name={name} user_type={user_type} user_id={user_id} />}/>
         <Route path="view-all-pricing-plans" element={<ViewAllPricingPlans name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="/" element={<Home name={name} user_type={user_type}/>}/>

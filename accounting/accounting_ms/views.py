@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import PricingPlan
-from .serializers import PricingPlanSerializer
+from .models import PricingPlan, AccountingBalance, Transaction
+from .serializers import PricingPlanSerializer, AccountingBalanceSerializer, TransactionSerializer
 from rest_framework import status
+from django.utils import timezone
 
 # Create your views here.
 
@@ -58,4 +59,30 @@ class DeletePricingPlan(APIView):
             return Response({"message": "Successfully deleted pricing plan"}, status=status.HTTP_204_NO_CONTENT)
         except PricingPlan.DoesNotExist:
             return Response({"error": "Pricing plan not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        
+class BuyPricingPlan(APIView):
+    def put(self, request):
+        try:
+            balance_instance = AccountingBalance.objects.get(id=1)
+        except AccountingBalance.DoesNotExist:
+            return Response({"message": "Accounting balance with specified id does not exist."}, status=status.HTTP_404_NOT_FOUND)
+        
+        current_balance = balance_instance.balance  
+        new_balance = current_balance + int(request.data.get('balance', 0)) 
+
+        serializer = AccountingBalanceSerializer(balance_instance, data={'balance': new_balance}, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            
+            user_id = request.data.get('user_id')
+            amount = int(request.data.get('balance', 0))
+            created_at = timezone.now()
+            transaction_data = {'amount': amount, 'userId': user_id, 'created_at': created_at}
+            transaction_serializer = TransactionSerializer(data=transaction_data)
+            if transaction_serializer.is_valid():
+                transaction_serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response
     

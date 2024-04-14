@@ -1,7 +1,7 @@
 import { response } from "express";
 import { useEffect } from "react";
 
-const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userType:string)=>void, user_id:string, setUserId:(userId:string)=>void}) => {
+const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userType:string)=>void, user_id:string, setUserId:(userId:string)=>void, user_type:string}) => {
 
   useEffect(() => {
     (async () => {
@@ -24,7 +24,10 @@ const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userT
 
     let menu;
 
-    if(!props.name){
+    if (props.user_type == "Guide"){
+        menu = <></>
+    }
+    else if(props.user_type != 'Accountant'){
         menu = (<>Login to continue</>)
     }
     else{
