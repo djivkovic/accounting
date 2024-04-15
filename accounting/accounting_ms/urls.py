@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PricingPlanView, AllPricingPlans,GetCurrentPricingPlan, EditPricingPlan,DeletePricingPlan,BuyPricingPlan, GetAllTransactions, ExportTransactionsCSV, ExportTransactionsCSV12, ExportTransactionsCSV6
+from .views import PricingPlanView, AllPricingPlans,GetCurrentPricingPlan, EditPricingPlan,DeletePricingPlan,BuyPricingPlan, GetAllTransactions, ExportTransactionsCSV, ExportTransactionsCSV12, ExportTransactionsCSV6,GetBalance
 
 urlpatterns = [
     path("create-pricing-plan", PricingPlanView.as_view(), name='create_pricing-plan-view'),
@@ -12,6 +12,7 @@ urlpatterns = [
     path("get-all-transactions-csv", ExportTransactionsCSV.as_view(), name='get-12month-transactions-csv-view'),
     path("get-12month-transactions-csv", ExportTransactionsCSV12.as_view(), name='get-all-transactions-csv-view'),
     path("get-6month-transactions-csv", ExportTransactionsCSV6.as_view(), name='get-6month-transactions-csv-view'),
+    path("get-balance", GetBalance.as_view(), name="get-balance-view")
     
     
 ]

@@ -59,7 +59,7 @@ const submit = async (e:SyntheticEvent) =>{
     </div>
     </div>)
     }else{
-       menu = <div>Access denied!</div>
+       menu = <p className='access-denied'>Access denied!</p>
     }
 
     return ( <>

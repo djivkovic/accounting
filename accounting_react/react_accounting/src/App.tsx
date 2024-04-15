@@ -23,7 +23,7 @@ function App() {
         <Route path="pricing-plan-shop" element={<PricingPlanShop name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="edit-pricing-plan/:id" element={<EditPricingPlan name={name} user_type={user_type} user_id={user_id} />}/>
         <Route path="view-all-pricing-plans" element={<ViewAllPricingPlans name={name} user_type={user_type} user_id={user_id}/>}/>
-        <Route path="view-all-transactions" element={<ViewAllTransactions/>} />
+        <Route path="view-all-transactions" element={<ViewAllTransactions name={name} user_type={user_type} user_id={user_id}/>} />
         <Route path="/" element={<Home name={name} user_type={user_type}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>

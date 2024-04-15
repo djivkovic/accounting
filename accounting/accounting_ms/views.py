@@ -142,3 +142,17 @@ class ExportTransactionsCSV12(APIView):
             writer.writerow([transaction.id, transaction.amount, transaction.userId, transaction.created_at])
         
         return response
+
+class GetBalance(APIView):
+    def get(self, request):
+        try:
+            balance_instance = AccountingBalance.objects.get(id=1)
+        except AccountingBalance.DoesNotExist:
+            return Response({"message": "Accounting balance with specified id does not exist."}, status=status.HTTP_404_NOT_FOUND)
+        
+        current_balance = balance_instance.balance  
+        serializer = AccountingBalanceSerializer(balance_instance, data={'balance': current_balance})
+        if serializer.is_valid():
+            return Response(serializer.data)
+        else:
+            return Response({"message":"error while getting balance..."})

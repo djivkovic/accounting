@@ -82,8 +82,25 @@ const PricingPlanShop = (props:{name:string, user_type:string, user_id:string}) 
                 </div>
             </div>
         );
-    } else {
-        menu = <div>Access denied</div>;
+    } else if(props.user_type === 'Accountant') {
+         menu = (
+            <div className="products-container">
+                <h2>All Pricing Plans</h2>
+                <div className="products">
+                    {data.map(product => (
+                        <div className="product" key={product.id}>
+                            <h3>{product.name}</h3>
+                            <div className="details">
+                                <span>Number:<br/><strong>{product.adv}</strong></span>
+                                <p>Price:<br/><strong>{product.price}</strong></p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }else{
+         menu = <p className="access-denied">Access denied</p>;
     }
 
     return menu;

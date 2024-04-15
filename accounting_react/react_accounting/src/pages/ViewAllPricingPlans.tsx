@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import '../css/view-all-pricing-pages.css'
 const ViewAllPricingPlans = (props:{name:string, user_type:string, user_id:string}) => {
     interface Product {
         id: string;
@@ -69,6 +69,7 @@ const ViewAllPricingPlans = (props:{name:string, user_type:string, user_id:strin
     
     let menu;
 
+    // if(true){
     if(props.user_type === 'Accountant'){
         menu = (
             <div className="products-container">
@@ -100,7 +101,7 @@ const ViewAllPricingPlans = (props:{name:string, user_type:string, user_id:strin
             </div>
         );
     } else {
-        menu = <div>Access denied</div>;
+        menu = <p className="access-denied">Access denied</p>;
     }
 
     return menu;
