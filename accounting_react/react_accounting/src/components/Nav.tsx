@@ -34,9 +34,11 @@ const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userT
         <ul className="nav-items">
             <li><a href="/">Home</a></li>
             <li><a href="#">Accounting</a></li>
-            <li><a href="#">View Transactions</a></li>
+            <li><a href="view-all-transactions">View Transactions</a></li>
             <li><a href="pricing-plan">Pricing plan</a></li>
             <li><a href="view-all-pricing-plans">View All</a></li>
+            <li><a href="pricing-plan-shop">Shop</a></li>
+
         </ul>
         </div>
     </nav>

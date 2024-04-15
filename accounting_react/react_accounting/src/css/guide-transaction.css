@@ -124,6 +124,7 @@
 
 .transaction-cards{
     display: flex;
+    margin: 0 auto;
 }
 
 .balance{
