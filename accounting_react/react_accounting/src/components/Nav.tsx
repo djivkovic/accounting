@@ -33,7 +33,7 @@ const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userT
         <div className="navbar-brand">
         <ul className="nav-items">
             <li><a href="/">Home</a></li>
-            <li><a href="#">Accounting</a></li>
+            <li><a href="statistic">Guide Statistic</a></li>
             <li><a href="view-all-transactions">View Transactions</a></li>
             <li><a href="pricing-plan">Pricing plan</a></li>
             <li><a href="view-all-pricing-plans">View All</a></li>
