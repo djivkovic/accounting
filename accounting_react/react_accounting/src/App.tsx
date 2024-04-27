@@ -9,6 +9,7 @@ import ViewAllPricingPlans from './pages/ViewAllPricingPlans';
 import NotFound from './pages/NotFound';
 import PricingPlanShop from './pages/PricingPlansShop';
 import ViewAllTransactions from './pages/ViewAllTransactions';
+import Statistic from './pages/Statistic';
 
 function App() {
   const [name, setName] = useState("");
@@ -23,7 +24,8 @@ function App() {
         <Route path="pricing-plan-shop" element={<PricingPlanShop name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="edit-pricing-plan/:id" element={<EditPricingPlan name={name} user_type={user_type} user_id={user_id} />}/>
         <Route path="view-all-pricing-plans" element={<ViewAllPricingPlans name={name} user_type={user_type} user_id={user_id}/>}/>
-        <Route path="view-all-transactions" element={<ViewAllTransactions name={name} user_type={user_type} user_id={user_id}/>} />
+        <Route path="view-all-transactions" element={<ViewAllTransactions name={name} user_type={user_type} user_id={user_id}/>}/>
+        <Route path="statistic" element={<Statistic/>}/>
         <Route path="/" element={<Home name={name} user_type={user_type}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
