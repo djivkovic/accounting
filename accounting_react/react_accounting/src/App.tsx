@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import PricingPlanShop from './pages/PricingPlansShop';
 import ViewAllTransactions from './pages/ViewAllTransactions';
 import Statistic from './pages/Statistic';
+import ViewAllContracts from './pages/ViewAllContracts';
 
 function App() {
   const [name, setName] = useState("");
@@ -26,6 +27,7 @@ function App() {
         <Route path="view-all-pricing-plans" element={<ViewAllPricingPlans name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="view-all-transactions" element={<ViewAllTransactions name={name} user_type={user_type} user_id={user_id}/>}/>
         <Route path="statistic" element={<Statistic/>}/>
+        <Route path="view-all-contracts" element={<ViewAllContracts user_type={user_type}/>}/>
         <Route path="/" element={<Home name={name} user_type={user_type}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>

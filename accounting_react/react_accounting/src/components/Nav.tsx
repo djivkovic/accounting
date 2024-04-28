@@ -1,4 +1,3 @@
-import { response } from "express";
 import { useEffect } from "react";
 
 const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userType:string)=>void, user_id:string, setUserId:(userId:string)=>void, user_type:string}) => {
@@ -38,7 +37,7 @@ const Nav = (props:{name:string; setName:(name:string)=>void, setUserType:(userT
             <li><a href="pricing-plan">Pricing plan</a></li>
             <li><a href="view-all-pricing-plans">View All</a></li>
             <li><a href="pricing-plan-shop">Shop</a></li>
-
+            <li><a href="view-all-contracts">Contracts</a></li>
         </ul>
         </div>
     </nav>
