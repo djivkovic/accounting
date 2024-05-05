@@ -67,6 +67,7 @@ const ViewAllContracts = (props) => {
 
     if (props.user_type === 'Accountant'){
         menu = (<div className="contract-container">
+    <button className="btn-see-details"> <a href="view-accepted-contracts">See Details</a></button>
     <h2>All Contracts</h2>
     <div className="contracts">
         {contracts.map(contract => (

@@ -86,3 +86,21 @@
 .contract-buttons button{
   margin-top: 2px;
 }
+
+.btn-see-details {
+  width: 100px;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(97, 162, 253);
+  padding: 10px;
+  border-radius: 7px;
+  transition: background-color 0.7s ease, color 0.5s ease; 
+  margin: 20px 40px;
+}
+
+.btn-see-details:hover {
+  background-color: rgb(30, 123, 252);
+}
