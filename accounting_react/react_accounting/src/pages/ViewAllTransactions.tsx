@@ -162,8 +162,8 @@ if(props.user_type === 'Accountant'){
         <p className="balance">Balance:<br />$  {balance && balance.balance}</p>
     </div>
        
+                <h2 className="all-transaction-title">All Transactions</h2>
         <div className="transaction-container">
-                <h2>All Transactions</h2>
                 <div className="transactions">
                     {data.map(transaction => (
                         <div className="transaction" key={transaction.id}>

@@ -140,3 +140,9 @@
   font-weight: 700;
   letter-spacing: 1px;
 }
+
+.all-transaction-title{
+  text-align: center;
+  font-size: 50px;
+  letter-spacing: 2.5px;
+}
