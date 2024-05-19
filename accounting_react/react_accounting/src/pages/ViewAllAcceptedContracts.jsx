@@ -1,8 +1,9 @@
-import { useEffect, useState, } from "react";
+import { useEffect, useState } from "react";
 import "../css/accepted-contracts.css";
 
 const ViewAllAcceptedContracts = (props) => {
     const [contracts, setContracts] = useState([]);
+    const [newPercentage, setNewPercentage] = useState({});
 
     const getAllContracts = async () => {
         try {
@@ -15,7 +16,12 @@ const ViewAllAcceptedContracts = (props) => {
             if (response.ok) {
                 const data = await response.json();
                 setContracts(data);
-                console.log(data);
+                // Inicijalizujte newPercentage sa postojećim vrednostima procenta
+                const initialPercentages = {};
+                data.forEach(contract => {
+                    initialPercentages[contract.id] = contract.percentage;
+                });
+                setNewPercentage(initialPercentages);
             } else {
                 console.log('Error');
             }
@@ -24,60 +30,74 @@ const ViewAllAcceptedContracts = (props) => {
         }
     }
 
-     const rejectContract = async (e, id) =>{
+    const updatePercentage = async (e, id) => {
         e.preventDefault();
-
-        const response = await fetch (`http://localhost:8000/api/reject-contract/${id}`,{
-            method:"POST",
+        
+        const response = await fetch(`http://localhost:8000/api/update-percentage/${id}/`, {
+            method: "POST",
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
+            body: JSON.stringify({ percentage: newPercentage[id] })
         });
 
-        if (response.ok){
-            alert("Successfully rejected contract");
+        if (response.ok) {
+            alert("Percentage updated successfully");
             window.location.reload();
-        }else{
-            alert("Error");
+        } else {
+            alert("Error updating percentage");
         }
+    }
+
+    const handlePercentageChange = (e, id) => {
+        setNewPercentage({ ...newPercentage, [id]: e.target.value });
     }
 
     useEffect(() => {
         getAllContracts();
     }, []);
 
-        let menu;
+    let menu;
 
     if (props.user_type === 'Accountant'){
-        menu = (<div className="contract-container">
-    <h2>All Accepted Contracts</h2>
-    <div className="accepted-contracts">
-        {contracts.map(contract => (
-            <div className={`accepted-contract`} key={contract.contract_id}>
-                <h3>Contract ID: {contract.contract_id}</h3>
+        menu = (
+            <div className="contract-container">
+                <h2>All Accepted Contracts</h2>
+                <div className="accepted-contracts">
+                    {contracts.map(contract => (
+                        <div className={`accepted-contract`} key={contract.contract_id}>
+                            <h3>Contract ID: {contract.contract_id}</h3>
 
-                <div className="accepted-contract-details">
-                    <p><strong>Hotelijer ID:</strong> {contract.id}</p>
-                    <p><strong>Hotelijer Name:</strong> {contract.name}</p>
-                    <p><strong>Hotelijer Email:</strong> {contract.email}</p>
-                    <p><strong>Balance: </strong> {contract.balance} $</p>
+                            <div className="accepted-contract-details">
+                                <p><strong>Hotelijer ID:</strong> {contract.id}</p>
+                                <p><strong>Hotelijer Name:</strong> {contract.name}</p>
+                                <p><strong>Hotelijer Email:</strong> {contract.email}</p>
+                                <p><strong>Balance: </strong> {contract.balance} $</p>
+                                <p><strong>Percentage: </strong> {contract.percentage} %</p>
+                                <input 
+                                    type="number" 
+                                    onChange={(e) => handlePercentageChange(e, contract.id)} 
+                                    placeholder="Enter new percentage" 
+                                    className="percentage-input"
+                                />
+                                <button 
+                                    onClick={(e) => updatePercentage(e, contract.id)} 
+                                    className="update-percentage"
+                                >
+                                    Update Percentage
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-
-                {(contract.status !== "rejected" && contract.status !== "accepted") && (
-                    <div className="contract-buttons">
-                        <button className="btn-reject" onClick={(e)=>{rejectContract(e, contract.contract_id)}}>Reject Contract</button>
-                    </div>
-                )}
             </div>
-        ))}
-    </div>
-</div>)
-    }else{
+        )
+    } else {
         menu = <h1 className="access-denied">Access Denied</h1>
     }
 
-
     return ( <>
-    {menu}</> );
+        {menu}
+    </> );
 }
- 
+
 export default ViewAllAcceptedContracts;
