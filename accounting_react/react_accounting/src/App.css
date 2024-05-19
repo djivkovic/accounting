@@ -27,4 +27,25 @@
   color: #ccc;
 }
 
+.lin-graph{
+  width: 1000px;
+  height: 550px;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+}
 
+.btn-see-statistic{
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 20px;
+  margin-left: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}

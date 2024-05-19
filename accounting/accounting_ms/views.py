@@ -7,6 +7,8 @@ from rest_framework import status
 from django.utils import timezone
 from django.http import HttpResponse
 from datetime import timedelta
+from datetime import datetime
+from django.http import JsonResponse
 import csv
 
 # Create your views here.
@@ -93,6 +95,21 @@ class GetAllTransactions(APIView):
     def get(self, request):
         transactions = Transaction.objects.all()
         serializer = TransactionSerializer(transactions, many=True)
+        return Response(serializer.data)
+    
+class GetAllTransactionsByMonth(APIView):
+    def get(self, request, month):
+        try:
+            year, month = map(int, month.split('-'))
+        except (ValueError, IndexError):
+            return Response("Invalid month format. Use 'YYYY-MM'.")
+
+        transactions = Transaction.objects.filter(
+            created_at__year=year,
+            created_at__month=month
+        )
+        serializer = TransactionSerializer(transactions, many=True)
+        
         return Response(serializer.data)
     
     

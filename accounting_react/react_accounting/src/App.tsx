@@ -12,6 +12,7 @@ import ViewAllTransactions from './pages/ViewAllTransactions';
 import Statistic from './pages/Statistic';
 import ViewAllContracts from './pages/ViewAllContracts';
 import ViewAllAcceptedContracts from './pages/ViewAllAcceptedContracts';
+import StatisticByMonth from './pages/StatisticByMonth';
 
 function App() {
   const [name, setName] = useState("");
@@ -30,6 +31,7 @@ function App() {
         <Route path="statistic" element={<Statistic/>}/>
         <Route path="view-all-contracts" element={<ViewAllContracts user_type={user_type}/>}/>
         <Route path="view-accepted-contracts" element={<ViewAllAcceptedContracts user_type={user_type}/>}/>
+        <Route path="view-transactions-by-month" element={<StatisticByMonth />}/>
         <Route path="/" element={<Home name={name} user_type={user_type}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import '../css/statistic-guide.css'
 import Chart from "chart.js/auto";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import 'jspdf-autotable';
+import { useNavigate } from "react-router-dom";
 
 const Statistic = () => {
   const [data, setData] = useState([]);
   const [chartType, setChartType] = useState("pie");
+  const [month, setMonth] = useState("");
+  const navigate = useNavigate();
 
   const getAllTransactions = async () => {
     try {
@@ -22,7 +26,6 @@ const Statistic = () => {
           created_at: new Date(transaction.created_at)
         }));
         setData(formattedData);
-        console.log(formattedData);
 
         displayChart(formattedData);
       }
@@ -31,9 +34,10 @@ const Statistic = () => {
     }
   };
 
+
   const displayChart = (data) => {
     const ctx = document.getElementById('myChart');
-    console.log('chartType', chartType)
+
     if (ctx) {
         let chartStatus = Chart.getChart("myChart");
         if (chartStatus != undefined) {
@@ -113,15 +117,26 @@ const Statistic = () => {
     pdf.addImage(imgData, 'PNG', offsetX, offsetY, imageWidth, imageHeight);
     
     pdf.addPage();
-    
-    data.forEach((transaction, index) => {
-      pdf.text(`Transaction ${index + 1}`, 10, index * 20 + 10);
-      pdf.text(`ID: ${transaction.id}, Amount: ${transaction.amount}, User ID: ${transaction.userId}, Date: ${transaction.created_at.toLocaleDateString()}`, 20, index * 20 + 20);
+
+    const transactionsTable = [];
+    data.forEach(transaction => {
+      transactionsTable.push([`Transaction: ${transaction.id}`, `Amount: ${transaction.amount}`, `User ID: ${transaction.userId}`, `Date: ${transaction.created_at.toLocaleDateString()}`]);
+    });
+
+    pdf.autoTable({
+      head: [['ID', 'Amount', 'User ID', 'Date']],
+      body: transactionsTable,
+      startY: 40,
+      theme: 'grid'
     });
     
     pdf.save("chart.pdf");
   });
 };
+
+const navigateToPage = () => {
+  navigate("/view-transactions-by-month");
+}
 
 useEffect(() => {
   getAllTransactions();
@@ -139,6 +154,8 @@ return (
               <option value="doughnut">Doughnut</option>
           </select>
       </div>
+
+      <button onClick={navigateToPage} className="btn-see-statistic">See statistic for certain month</button>
 
       <div className="transaction-container">
           <div className="statistic-card">
