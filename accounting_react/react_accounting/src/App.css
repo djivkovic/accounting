@@ -69,3 +69,37 @@
     letter-spacing: 1px;
     width: 100%;
 }
+
+.best-hotelijer{
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #5457e8;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  justify-self: center;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.best-hotelijer:hover{
+  background-color: #0000ff;
+}
+
+.take-percentage{
+  width: 130px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #84fa82;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  justify-self: center;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.take-percentage:hover{
+  background-color: #00ff00;
+}

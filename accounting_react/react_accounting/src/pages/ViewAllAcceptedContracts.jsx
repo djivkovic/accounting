@@ -4,6 +4,20 @@ import "../css/accepted-contracts.css";
 const ViewAllAcceptedContracts = (props) => {
     const [contracts, setContracts] = useState([]);
     const [newPercentage, setNewPercentage] = useState({});
+    const [bestHotelijer, setBestHotelijer] = useState({});
+
+    const fetchBestHotelijer = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/highest-total-amount/');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setBestHotelijer(data);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };
 
     const getAllContracts = async () => {
         try {
@@ -16,7 +30,6 @@ const ViewAllAcceptedContracts = (props) => {
             if (response.ok) {
                 const data = await response.json();
                 setContracts(data);
-                // Inicijalizujte newPercentage sa postojećim vrednostima procenta
                 const initialPercentages = {};
                 data.forEach(contract => {
                     initialPercentages[contract.id] = contract.percentage;
@@ -29,6 +42,19 @@ const ViewAllAcceptedContracts = (props) => {
             console.error('Error:', error);
         }
     }
+
+     const takePercentageFromHotelijer = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/take-percentage-from-hotelijer/');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            window.location.reload();
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };
 
     const updatePercentage = async (e, id) => {
         e.preventDefault();
@@ -58,13 +84,28 @@ const ViewAllAcceptedContracts = (props) => {
 
     let menu;
 
-    if (props.user_type === 'Accountant'){
+    if (props.user_type === 'Accountant') {
         menu = (
             <div className="contract-container">
                 <h2>All Accepted Contracts</h2>
+
+                <div>
+                    <div className="buttons">
+                        <button className="best-hotelijer" onClick={fetchBestHotelijer}>Show Best Hotelijer</button>
+                        <button className="take-percentage" onClick={takePercentageFromHotelijer}>Take Percentage</button>
+                    </div>
+
+                    {bestHotelijer.userId && (
+                        <div>
+                            <p>User ID: {bestHotelijer.userId}</p>
+                            <p>Total Amount: {bestHotelijer.total_amount} $</p>
+                        </div>
+                    )}
+                </div>
+
                 <div className="accepted-contracts">
                     {contracts.map(contract => (
-                        <div className={`accepted-contract`} key={contract.contract_id}>
+                        <div className="accepted-contract" key={contract.contract_id}>
                             <h3>Contract ID: {contract.contract_id}</h3>
 
                             <div className="accepted-contract-details">
@@ -95,9 +136,11 @@ const ViewAllAcceptedContracts = (props) => {
         menu = <h1 className="access-denied">Access Denied</h1>
     }
 
-    return ( <>
-        {menu}
-    </> );
+    return (
+        <>
+            {menu}
+        </>
+    );
 }
 
 export default ViewAllAcceptedContracts;
