@@ -103,3 +103,28 @@
 .take-percentage:hover{
   background-color: #00ff00;
 }
+
+.date-picker {
+    margin-left: 20px;
+}
+
+.date-picker {
+  cursor: pointer;
+  width: 180px;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 20px;
+  margin-left: 5px;
+  box-sizing: border-box;
+}
+
+.date-picker::-webkit-calendar-picker-indicator {
+  position: absolute;
+  padding: 0;
+  margin-left: 153px;
+  font-size: 16px;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -44,17 +44,28 @@ const ViewAllAcceptedContracts = (props) => {
     }
 
      const takePercentageFromHotelijer = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/take-percentage-from-hotelijer/');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+    try {
+        // const lastCalled = localStorage.getItem('lastCalled');
+        // const now = new Date();
+        // const lastCalledDate = lastCalled ? new Date(lastCalled) : null;
+        
+        // if (lastCalledDate && now.getMonth() === lastCalledDate.getMonth() && now.getFullYear() === lastCalledDate.getFullYear()) {
+        //     alert.log('Funkcija je već pozvana ovog mjeseca.');
+        //     return;
+        // }
 
-            window.location.reload();
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
+        const response = await fetch('http://127.0.0.1:8000/api/take-percentage-from-hotelijer/');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    };
+
+        // localStorage.setItem('lastCalled', now.toString());
+
+        window.location.reload();
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+};
 
     const updatePercentage = async (e, id) => {
         e.preventDefault();

@@ -10,12 +10,15 @@ const StatisticByMonth = () => {
   const [chartData, setChartData] = useState(null);
 
   const handleChange = (event) => {
-    setYearMonth(event.target.value);
-  };
+    const selectedDate = event.target.value; // "YYYY-MM-DD" format
+    setYearMonth(selectedDate);
+};
 
   const handleButtonClick = async () => {
     try {
-      const response = await fetch(`http://localhost:8001/pricing-plan/transactions/${yearMonth}`, {
+      
+      const yearMonth2 = yearMonth.slice(0, 7); 
+      const response = await fetch(`http://localhost:8001/pricing-plan/transactions/${yearMonth2}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -96,9 +99,19 @@ const handleDownloadPDF = () => {
 
   return (
     <>
-      <input type="text" value={yearMonth} onChange={handleChange} placeholder="Enter year and month (YYYY-MM)"/>
       <button onClick={handleButtonClick} className='btn-see-statistic'>Fetch Transactions</button>
       <button onClick={handleDownloadPDF} className='btn-see-statistic'>Download as PDF</button>
+      <input 
+    type="date" 
+    className='date-picker'
+    value={yearMonth} 
+    onChange={handleChange} 
+    placeholder="Enter year and month (YYYY-MM)"
+    max="9999-12" // Postavljamo maksimalnu vrednost kao krajnji mesec i godinu
+    min="0001-01" // Postavljamo minimalnu vrednost kao početak meseca i godine
+    pattern="\d{4}-\d{2}" // Dodajemo regex pattern za validaciju formata
+    title="Enter a year and month in the format YYYY-MM"
+/>
       <div id='chart' className="lin-graph">
         {chartData && <Line data={chartData} options={{
           plugins: {
